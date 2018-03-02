@@ -1,0 +1,28 @@
+{
+    "name": "web-terminal-addon",
+    "description": "web-terminal for easy express integration",
+    "version": "0.0.1",
+    "keywords": [
+        "express",
+        "web-terminal",
+        "webterminal",
+        "administration",
+        "repl",
+        "sandbox"
+    ],
+    "scripts": {
+        "dev": "nodemon test.js"
+    },
+    "author": "Marcel Link <marcel.link@t-online.de>",
+    "dependencies": {
+        "jquery": "^3.3.1",
+        "jquery.terminal": "^1.11.4",
+        "jsome": "^2.5.0",
+        "vm2": "^3.5.2"
+    },
+    "main": "main.js",
+    "devDependencies": {
+        "nodemon": "^1.17.1",
+        "express": "^4.16.2"
+    }
+}

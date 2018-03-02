@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<title>node-web-repl</title>
+<script src="jquery.min.js"></script>
+<script src="jquery.terminal.min.js"></script>
+<script src="unix_formatting.js"></script>
+<link href="jquery.terminal.min.css" rel="stylesheet"/>
+<link href="index.css" rel="stylesheet"/>
+<script>
+$(document).ready(function() {$('body').terminal(function(code){
+	var self = this;
+	$.ajax({
+  		url: "api/"+encodeURIComponent(code),
+  		dataType: 'text'
+	}).fail(function(err){
+		self.echo("\n --- offline --- \n");
+	}).done(function(data) {
+		data = data.split("\n");
+		for(var i=0; i<data.length; i++) {
+			self.echo(data[i]);
+		}
+	});
+}, {greetings:'', prompt: 'js> '});});
+</script>
+</head>
+<body>
+</body>
+</html>

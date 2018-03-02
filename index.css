@@ -1,0 +1,6 @@
+.cmd, .cmd .prompt, .terminal, .terminal .terminal-output > div > div {
+
+    font-size: 4vmin;
+    line-height: 5vmin;
+
+}
