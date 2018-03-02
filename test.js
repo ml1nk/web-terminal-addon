@@ -13,11 +13,15 @@ function test2 () {
     return "version: " + require(path.join(__dirname,"package.json")).version;
 }
 
+async function test3 () {
+    return "test";
+}
+
 let context = { 
     result : "42", 
     test1 : test1,
-    test2 : test2
-
+    test2 : test2,
+    test3 : test3
 };
 
 webrepl(router, {

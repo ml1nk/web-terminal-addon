@@ -29,12 +29,12 @@ function webrepl(router, options) {
 	});
 	
 
-	router.get('/api/:code?', (req, res)=>{
+	router.get('/api/:code?', async (req, res)=>{
 		let code = req.params.code;
 		let out = "";
 		let capture = "";
 		try {
-			result = vm.run(code);
+			result = await vm.run(code);
 			if(result !== undefined) {
 				result = jsome.getColoredString(result);
 			}
