@@ -9,10 +9,10 @@ function webrepl(router, options) {
 
 
 	// static files
-	router.get('/jquery.min.js', (req, res)=>res.sendFile(__dirname+"/node_modules/jquery/dist/jquery.min.js"));
-	router.get('/jquery.terminal.min.js', (req, res)=>res.sendFile(__dirname+"/node_modules/jquery.terminal/js/jquery.terminal.min.js"));
-	router.get('/unix_formatting.js', (req, res)=>res.sendFile(__dirname+"/node_modules/jquery.terminal/js/unix_formatting.js"));
-	router.get('/jquery.terminal.min.css', (req, res)=>res.sendFile(__dirname+"/node_modules/jquery.terminal/css/jquery.terminal.min.css"));
+	router.get('/jquery.min.js', (req, res)=>res.sendFile(require.resolve("jquery/dist/jquery.min.js")));
+	router.get('/jquery.terminal.min.js', (req, res)=>res.sendFile(require.resolve("jquery.terminal/js/jquery.terminal.min.js")));
+	router.get('/unix_formatting.js', (req, res)=>res.sendFile(require.resolve("jquery.terminal/js/unix_formatting.js")));
+	router.get('/jquery.terminal.min.css', (req, res)=>res.sendFile(require.resolve("jquery.terminal/css/jquery.terminal.min.css")));
 	router.get('/index.css', (req, res)=>res.sendFile(__dirname+"/index.css"));
 	router.get('/', (req, res)=>{
 		// redirect for example http://localhost:8081/terminal => http://localhost:8081/terminal/
