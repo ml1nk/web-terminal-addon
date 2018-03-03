@@ -10,10 +10,11 @@ function webrepl(router, options) {
 
 	// static files
 	router.get('/jquery.min.js', (req, res)=>res.sendFile(require.resolve("jquery/dist/jquery.min.js")));
-	router.get('/jquery.terminal.min.js', (req, res)=>res.sendFile(require.resolve("jquery.terminal/js/jquery.terminal.min.js")));
+	router.get('/jquery.terminal.min.js', (req, res)=>res.sendFile(require.resolve("jquery.terminal/js/jquery.terminal.js")));
 	router.get('/unix_formatting.js', (req, res)=>res.sendFile(require.resolve("jquery.terminal/js/unix_formatting.js")));
 	router.get('/jquery.terminal.min.css', (req, res)=>res.sendFile(require.resolve("jquery.terminal/css/jquery.terminal.min.css")));
 	router.get('/index.css', (req, res)=>res.sendFile(__dirname+"/index.css"));
+
 	router.get('/', (req, res)=>{
 		// redirect for example http://localhost:8081/terminal => http://localhost:8081/terminal/
 		const me = url.parse(req.originalUrl);
@@ -39,7 +40,18 @@ function webrepl(router, options) {
 				result = jsome.getColoredString(result);
 			}
 		} catch (err) {
-			result = chalk.red("😱 ╣ " +err.message + " ╠ 😱");
+			if(typeof err === "object" && err.hasOwnProperty("message")) {
+				err = err.message;
+			} else if(err === undefined) {
+				err = "undefined";
+			} else {
+				try {
+					err = jsome.getColoredString(err);
+				} catch (e) {
+					err = "error breaks error processing";
+				}
+			}
+			result = chalk.red("😱 ╣ " + err + " ╠ 😱");
 		}
 		res.set('Content-Type', 'text/plain');
 		res.send(result);

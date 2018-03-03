@@ -6,7 +6,7 @@ var app = express();
 var router = express.Router();
 
 function test1 () { 
-    return "unknown" 
+    return "this [is an] example"; 
 }
 
 function test2 () { 
@@ -14,14 +14,19 @@ function test2 () {
 }
 
 async function test3 () {
-    return "test";
+    await Promise.reject();
+}
+
+async function test4 () {
+    await Promise.reject({"test":"tree"});
 }
 
 let context = { 
     result : "42", 
     test1 : test1,
     test2 : test2,
-    test3 : test3
+    test3 : test3,
+    test4 : test4
 };
 
 webrepl(router, {
