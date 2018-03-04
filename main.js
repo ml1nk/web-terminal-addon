@@ -1,12 +1,18 @@
 const util = require('util');
 const url = require('url')
 const chalk = require('chalk');
+const fn = require('fn-args');
 const jsome = require('jsome');
 const {VM} = require('vm2');
 
-function webrepl(router, options) {
-	const vm = new VM(options);
+function webrepl(router, options = {}) {
 
+	let help = "";
+	if(options.hasOwnProperty("sandbox")) {
+		help = _createHelp(options.sandbox);
+	}
+
+	const vm = new VM(options);
 
 	// static files
 	router.get('/jquery.min.js', (req, res)=>res.sendFile(require.resolve("jquery/dist/jquery.min.js")));
@@ -29,15 +35,18 @@ function webrepl(router, options) {
 		}
 	});
 	
-
 	router.get('/api/:code?', async (req, res)=>{
 		let code = req.params.code;
 		let out = "";
 		let capture = "";
 		try {
-			result = await vm.run(code);
-			if(result !== undefined) {
-				result = jsome.getColoredString(result);
+			if(code) {
+				result = await vm.run(code);
+				if(result !== undefined) {
+					result = jsome.getColoredString(result);
+				}
+			} else {
+				result = help;
 			}
 		} catch (err) {
 			if(typeof err === "object" && err.hasOwnProperty("message")) {
@@ -57,6 +66,18 @@ function webrepl(router, options) {
 		res.send(result);
 	});
 
+	return vm;
+}
+
+function _createHelp(obj) {
+	return chalk.green("this.\n" + Object.keys(obj).reduce((res, key)=>{
+		if(res) res += "\n";
+		res += "	"+key;
+		if(typeof obj[key] === "function") {
+			res += "("+fn(obj[key]).join(", ")+")";
+		}
+		return res;
+	},""));
 }
 
 module.exports = webrepl;

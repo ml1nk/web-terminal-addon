@@ -8,20 +8,25 @@
 <link href="jquery.terminal.min.css" rel="stylesheet"/>
 <link href="index.css" rel="stylesheet"/>
 <script>
-$(document).ready(function() {$('body').terminal(function(code){
-	var self = this;
-	$.ajax({
-  		url: "api/"+encodeURIComponent(code),
-  		dataType: 'text'
-	}).fail(function(err){
-		self.echo("\n --- offline --- \n");
-	}).done(function(data) {
-		data = data.split("\n");
-		for(var i=0; i<data.length; i++) {
-			self.echo(data[i]);
-		}
+$(document).ready(function() {
+	// unix formatting always on
+	$.terminal.defaults.formatters[0].__meta__ = true;
+    let term = $('body').terminal(function(code){
+		var self = this;
+		$.ajax({
+			url: "api/"+encodeURIComponent(code),
+			dataType: 'text'
+		}).fail(function(err){
+			self.echo("\n --- offline --- \n");
+		}).done(function(data) {
+			self.echo(data);
+		});
+	}, {
+		greetings:'', 
+		prompt: 'js> ', 
+		unixFormattingEscapeBrackets: true
 	});
-}, {greetings:'', prompt: 'js> ', unixFormattingEscapeBrackets: true});});
+});
 </script>
 </head>
 <body>

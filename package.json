@@ -1,7 +1,7 @@
 {
     "name": "web-terminal-addon",
     "description": "web-terminal for easy express integration",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "keywords": [
         "express",
         "web-terminal",
@@ -15,8 +15,9 @@
     },
     "author": "Marcel Link <marcel.link@t-online.de>",
     "dependencies": {
+        "fn-args": "^3.0.0",
         "jquery": "^3.3.1",
-        "jquery.terminal": "git+https://github.com/ml1nk/jquery.terminal.git#devel",
+        "jquery.terminal": "git+https://github.com/jcubic/jquery.terminal.git#devel",
         "jsome": "^2.5.0",
         "vm2": "^3.5.2"
     },

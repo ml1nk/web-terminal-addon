@@ -21,15 +21,20 @@ async function test4 () {
     await Promise.reject({"test":"tree"});
 }
 
+function test5 (inp) {
+    return inp;
+}
+
 let context = { 
-    result : "42", 
-    test1 : test1,
-    test2 : test2,
-    test3 : test3,
-    test4 : test4
+    result: "42", 
+    test1: test1,
+    test2: test2,
+    test3: test3,
+    test4: test4,
+    test5: test5
 };
 
-webrepl(router, {
+let vm = webrepl(router, {
     timeout: 1000,
     sandbox: context
 });
