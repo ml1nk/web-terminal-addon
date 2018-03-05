@@ -1,6 +1,6 @@
 const util = require('util');
 const url = require('url')
-const chalk = require('chalk');
+const chalk = new (require('chalk')).constructor({level: 1});
 const fn = require('fn-args');
 const jsome = require('jsome');
 const {VM} = require('vm2');
