@@ -1,7 +1,7 @@
 {
     "name": "web-terminal-addon",
     "description": "web-terminal for easy express integration",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "keywords": [
         "express",
         "web-terminal",
