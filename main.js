@@ -43,7 +43,7 @@ function webrepl(router, options = {}) {
 			if(code) {
 				result = await vm.run(code);
 				if(result !== undefined) {
-					result = jsome.getColoredString(result);
+					result = _getColoredString(result);
 				}
 			} else {
 				result = help;
@@ -55,7 +55,7 @@ function webrepl(router, options = {}) {
 				err = "undefined";
 			} else {
 				try {
-					err = jsome.getColoredString(err);
+					err =  _getColoredString(err);
 				} catch (e) {
 					err = "error breaks error processing";
 				}
@@ -78,6 +78,24 @@ function _createHelp(obj) {
 		}
 		return res;
 	},""));
+}
+
+function _getColoredString(text) {
+	let del = false;
+	let tmp;
+	if(!process.env.hasOwnProperty("FORCE_COLOR")) {
+		del = true;
+	} else {
+		tmp = process.env.FORCE_COLOR;
+	}
+	process.env.FORCE_COLOR = 1;
+	let res =  jsome.getColoredString(text);
+	if(del) {
+		delete process.env.FORCE_COLOR;
+	} else {
+		process.env.FORCE_COLOR = tmp;
+	}
+	return res;
 }
 
 module.exports = webrepl;
