@@ -1,7 +1,7 @@
 {
     "name": "web-terminal-addon",
     "description": "web-terminal for easy express integration",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "keywords": [
         "express",
         "web-terminal",
@@ -17,13 +17,13 @@
     "dependencies": {
         "fn-args": "^3.0.0",
         "jquery": "^3.3.1",
-        "jquery.terminal": "git+https://github.com/jcubic/jquery.terminal.git#devel",
+        "jquery.terminal": "^1.14.0",
         "jsome": "^2.5.0",
         "vm2": "^3.5.2"
     },
     "main": "main.js",
     "devDependencies": {
-        "nodemon": "^1.17.1",
-        "express": "^4.16.2"
+        "express": "^4.16.3",
+        "nodemon": "^1.17.3"
     }
 }
